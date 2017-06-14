@@ -1,18 +1,14 @@
 FROM ubuntu:16.04
 
-MAINTAINER Tanguy Pruvot <tanguy.pruvot@gmail.com>
-
 RUN apt-get update -qq
 
-RUN apt-get install -qy build-essential libcurl4-openssl-dev git automake libtool libjansson* libncurses5-dev libssl-dev
+RUN apt-get install -qy build-essential git libtool libjansson* libssl-dev libcurl4-openssl-dev libncurses5-dev libgmp-dev automake
 
-RUN git clone --recursive https://github.com/tpruvot/cpuminer-multi -b linux
+RUN git clone https://github.com/JayDDee/cpuminer-opt 
 
-RUN cd cpuminer-multi && ./autogen.sh  \
-    && ./configure --with-crypto --with-curl \
-    && make -j"$(nproc)" \
+RUN cd cpuminer-opt && ./build.sh  \
     && make install \
     && cd .. \
-    && rm -rf cpuminer-multi
+    && rm -rf cpuminer-opt
 
 ENTRYPOINT ["cpuminer"]
