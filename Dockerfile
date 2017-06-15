@@ -10,5 +10,3 @@ RUN cd cpuminer-opt && ./build.sh  \
     && make install \
     && cd .. \
     && rm -rf cpuminer-opt
-
-ENTRYPOINT ["cpuminer"]
